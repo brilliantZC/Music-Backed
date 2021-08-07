@@ -1,10 +1,8 @@
 package com.brilliantZC.music.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.brilliantZC.music.entity.Admin;
 import com.brilliantZC.music.service.AdminService;
-import com.brilliantZC.music.utils.Consts;
 import com.brilliantZC.music.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
