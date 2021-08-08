@@ -7,6 +7,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 歌手
+ */
 @TableName("singer")
 public class Singer implements Serializable {
     //主键
