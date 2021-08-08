@@ -1,10 +1,16 @@
 package com.brilliantZC.music.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@TableName("singer")
 public class Singer implements Serializable {
     //主键
+    @TableId
     private Integer id;
     //歌手名
     private String name;
@@ -13,7 +19,7 @@ public class Singer implements Serializable {
     //头像
     private String pic;
     //生日
-    private Date birth;
+    private String birth;
     //所属地
     private String location;
     //简介
@@ -51,11 +57,11 @@ public class Singer implements Serializable {
         this.pic = pic;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

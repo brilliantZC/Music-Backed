@@ -28,7 +28,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerDao, Singer> implements
 
     @Override
     public List<Singer> allSinger() {
-        List<Singer> singers = singerDao.selectList(new QueryWrapper<Singer>().eq("sex",1).eq("sex",0));
+        List<Singer> singers = singerDao.selectList(new QueryWrapper<Singer>().eq("sex",1).or().eq("sex",0).or().eq("sex",2));
         return singers;
     }
 

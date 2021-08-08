@@ -1,12 +1,17 @@
 package com.brilliantZC.music.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
  * 管理员
  */
+@TableName("admin")
 public class Admin implements Serializable {
     /*主键*/
+    @TableId
     private Integer id;
     /*账号*/
     private String name;
