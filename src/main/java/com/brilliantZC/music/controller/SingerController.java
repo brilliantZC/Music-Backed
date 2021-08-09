@@ -37,12 +37,26 @@ public class SingerController {
     @RequestMapping("/delete")
     private R deleteSinger(@RequestParam("id") Integer id){
 
+        //如果歌手头像不是默认的，删除文件
+        Singer singer = singerService.getById(id);
+        String defaultPic = "/img/singerPic/hhh.jpg";
+        if(!singer.getPic().equals(defaultPic)){
+            String filePath = System.getProperty("user.dir")+singer.getPic().replace("/",System.getProperty("file.separator"));
+            File file = new File(filePath);
+            // 判断目录或文件是否存在
+            if (!file.exists()) {  // 不存在返回 false
+                return R.error().put("code",0).put("msg","删除文件不存在");
+            } else {
+                file.delete();
+            }
+        }
+
         singerDao.deleteById(id);
         return R.ok().put("code",1).put("msg","删除成功！！！");
     }
 
     @RequestMapping("/selectPrimaryKey")
-    private Object selectPrimaryKey(@PathVariable("id") Integer id){
+    private Object selectPrimaryKey(@RequestParam("id") Integer id){
 
         return singerService.selectPrimaryKey(id);
     }
@@ -54,7 +68,7 @@ public class SingerController {
     }
 
     @RequestMapping("/singerOfSex")
-    private Object singerOfSex(@PathVariable("sex") Integer sex){
+    private Object singerOfSex(@RequestParam("sex") Integer sex){
 
         return singerService.singerOfSex(sex);
     }
