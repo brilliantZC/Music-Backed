@@ -85,8 +85,20 @@ public class SingerController {
     @RequestMapping("/updateSingerPic")
     public R updateSingerPic(@RequestParam("file") MultipartFile avatorFile,@RequestParam("id") int id){
 
+        Singer singerpic = singerService.getById(id);
+        String defaultPic = "/img/singerPic/hhh.jpg";
         if(avatorFile.isEmpty()){
             return R.error().put("code",0).put("msg","文件上传失败！！！");
+        }
+        if(!singerpic.getPic().equals(defaultPic)){
+            String filePath = System.getProperty("user.dir")+singerpic.getPic().replace("/",System.getProperty("file.separator"));
+            File file = new File(filePath);
+            // 判断目录或文件是否存在
+            if (!file.exists()) {  // 不存在返回 false
+                return R.error().put("code",0).put("msg","删除文件不存在");
+            } else {
+                file.delete();
+            }
         }
         //文件名 = 当前事件毫秒+原来的文件名
         String fileName = System.currentTimeMillis()+avatorFile.getOriginalFilename();

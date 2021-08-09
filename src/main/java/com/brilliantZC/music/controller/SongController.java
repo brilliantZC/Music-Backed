@@ -112,7 +112,6 @@ public class SongController {
         String defaultPic = "/img/songPic/music.png";
         if(!song.getPic().equals(defaultPic)){
             String picpath = System.getProperty("user.dir")+song.getPic().replace("/",System.getProperty("file.separator"));
-            System.out.println(picpath);
             File file = new File(picpath);
             // 判断目录或文件是否存在
             if (!file.exists()) {  // 不存在返回 false
@@ -132,6 +131,103 @@ public class SongController {
         }
         songDao.deleteById(id);
         return R.ok().put("code",1).put("msg","删除成功！！！");
+    }
+
+    /**
+     * 更新歌曲图片
+     */
+    @RequestMapping("/updateSongPic")
+    public R updateSongPic(@RequestParam("file") MultipartFile avatorFile,@RequestParam("id") int id){
+
+        Song songpic = songService.getById(id);
+        String defaultPic = "/img/songPic/music.png";
+
+        if(avatorFile.isEmpty()){
+            return R.error().put("code",0).put("msg","文件上传失败！！！");
+        }
+        if(!songpic.getPic().equals(defaultPic)){
+            String picpath = System.getProperty("user.dir")+songpic.getPic().replace("/",System.getProperty("file.separator"));
+            File file = new File(picpath);
+            // 判断目录或文件是否存在
+            if (!file.exists()) {  // 不存在返回 false
+                return R.error().put("code",0).put("msg","删除文件不存在");
+            } else {
+                file.delete();
+            }
+        }
+        //文件名 = 当前事件毫秒+原来的文件名
+        String fileName = System.currentTimeMillis()+avatorFile.getOriginalFilename();
+        //文件路径
+        String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"img"
+                +System.getProperty("file.separator")+"songPic";
+        //如果文件路径不存在，新增该路径
+        File file1 = new File(filePath);
+        if(!file1.exists()){
+            file1.mkdir();
+        }
+        //实际的文件地址
+        File dest = new File(filePath+System.getProperty("file.separator")+fileName);
+        //存储到数据库里的相对文件地址
+        String storeAvatorPath = "/img/songPic/"+fileName;
+        try{
+            avatorFile.transferTo(dest);
+            Song song = new Song();
+            song.setId(id);
+            song.setPic(storeAvatorPath);
+            songService.updateById(song);
+            return R.ok().put("code",1).put("msg","上传成功！！！").put("pic",storeAvatorPath);
+
+        }catch (IOException e){
+            e.printStackTrace();
+            return R.error().put("code",0).put("msg","文件上传失败！！！"+e.getMessage());
+        }
+    }
+
+    /**
+     * 更新歌曲
+     */
+    @RequestMapping("/updateSongUrl")
+    public R updateSongUrl(@RequestParam("file") MultipartFile avatorFile,@RequestParam("id") int id){
+
+        Song songurl = songService.getById(id);
+
+        if(avatorFile.isEmpty()){
+            return R.error().put("code",0).put("msg","文件上传失败！！！");
+        }
+        String filePathurl = System.getProperty("user.dir")+songurl.getUrl().replace("/",System.getProperty("file.separator"));
+
+        File file2 = new File(filePathurl);
+        // 判断目录或文件是否存在
+        if (!file2.exists()) {  // 不存在返回 false
+            return R.error().put("code",0).put("msg","删除文件不存在");
+        } else {
+            file2.delete();
+        }
+        //文件名 = 当前事件毫秒+原来的文件名
+        String fileName = System.currentTimeMillis()+avatorFile.getOriginalFilename();
+        //文件路径
+        String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"song";
+        //如果文件路径不存在，新增该路径
+        File file1 = new File(filePath);
+        if(!file1.exists()){
+            file1.mkdir();
+        }
+        //实际的文件地址
+        File dest = new File(filePath+System.getProperty("file.separator")+fileName);
+        //存储到数据库里的相对文件地址
+        String storeAvatorPath = "/song/"+fileName;
+        try{
+            avatorFile.transferTo(dest);
+            Song song = new Song();
+            song.setId(id);
+            song.setUrl(storeAvatorPath);
+            songService.updateById(song);
+            return R.ok().put("code",1).put("msg","上传成功！！！").put("avator",storeAvatorPath);
+
+        }catch (IOException e){
+            e.printStackTrace();
+            return R.error().put("code",0).put("msg","文件上传失败！！！"+e.getMessage());
+        }
     }
 
 
