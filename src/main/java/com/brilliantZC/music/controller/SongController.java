@@ -217,10 +217,14 @@ public class SongController {
         //存储到数据库里的相对文件地址
         String storeAvatorPath = "/song/"+fileName;
         try{
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+            String time = simpleDateFormat.format(date);
             avatorFile.transferTo(dest);
             Song song = new Song();
             song.setId(id);
             song.setUrl(storeAvatorPath);
+            song.setUpdateTime(time);
             songService.updateById(song);
             return R.ok().put("code",1).put("msg","上传成功！！！").put("avator",storeAvatorPath);
 
