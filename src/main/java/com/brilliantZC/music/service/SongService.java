@@ -12,4 +12,7 @@ public interface SongService extends IService<Song> {
     public List<Song> songOfName(String name);
     //歌曲名精确查询
     public List<Song> songOfSongName(String name);
+    //所有歌曲
+    public List<Song> allSong();
+
 }

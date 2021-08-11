@@ -103,6 +103,11 @@ public class SongController {
         return R.ok().put("code",1).put("msg","更新成功！！！");
     }
 
+    //查询所有歌曲
+    @RequestMapping("/allSong")
+    private Object allSong(){
+        return songService.allSong();
+    }
     //删除歌曲
     @RequestMapping("/delete")
     private R deleteSong(@RequestParam("id") Integer id){
