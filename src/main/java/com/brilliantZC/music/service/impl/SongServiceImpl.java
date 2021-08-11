@@ -27,4 +27,10 @@ public class SongServiceImpl extends ServiceImpl<SongDao, Song> implements SongS
         List<Song> songs = songDao.selectList(new QueryWrapper<Song>().like("name",name));
         return songs;
     }
+
+    @Override
+    public List<Song> songOfSongName(String name) {
+        List<Song> songs = songDao.selectList(new QueryWrapper<Song>().eq("name",name));
+        return songs;
+    }
 }

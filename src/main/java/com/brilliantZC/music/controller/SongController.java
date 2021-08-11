@@ -234,5 +234,19 @@ public class SongController {
         }
     }
 
+    //根据歌曲id查询歌曲
+    @RequestMapping("/detail")
+    public Object songOfSongId(@RequestParam("songId") Integer songId){
+
+        return songService.getById(songId);
+    }
+
+    //根据歌曲名精确查询歌曲
+    @RequestMapping("/songOfSongName")
+    public Object songOfSongName(@RequestParam("songName") String songName){
+
+        return songService.songOfSongName(songName);
+    }
+
 
 }
