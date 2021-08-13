@@ -253,5 +253,13 @@ public class SongController {
         return songService.songOfSongName(songName);
     }
 
+    //根据歌曲名模糊查询歌曲
+    @RequestMapping("/likeSongOfName")
+    public Object likeSongOfName(@RequestParam("name") String name){
+
+        System.out.println(songService.songOfSongNameLike(name));
+        return songService.songOfSongNameLike(name);
+    }
+
 
 }
