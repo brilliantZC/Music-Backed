@@ -1,5 +1,6 @@
 package com.brilliantZC.music.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.brilliantZC.music.dao.ConsumerDao;
 import com.brilliantZC.music.entity.Consumer;
 import com.brilliantZC.music.entity.Singer;
@@ -29,6 +30,11 @@ public class ConsumerController {
     @RequestMapping("/add")
     private R addConsumer(@RequestBody Consumer consumer){
 
+        //判断当前用户名是否存在，若存在则拒绝添加
+        Consumer consumer1 = consumerService.getOne(new QueryWrapper<Consumer>().eq("username",consumer.getUsername()));
+        if(consumer1 != null ){
+            return R.error().put("code",0).put("msg","用户名已存在！！！");
+        }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
         String time = simpleDateFormat.format(date);
@@ -133,6 +139,16 @@ public class ConsumerController {
             e.printStackTrace();
             return R.error().put("code",0).put("msg","文件上传失败！！！"+e.getMessage());
         }
+    }
+
+    //前端用户登录
+    @RequestMapping("/login")
+    private R loginConsumer(@RequestBody Consumer consumer){
+        Consumer consumer1 = consumerService.getOne(new QueryWrapper<Consumer>().eq("username",consumer.getUsername()).eq("password",consumer.getPassword()));
+        if(consumer1 != null){
+            return R.ok().put("code",1).put("userMsg",consumer1.getUsername()).put("msg","登录成功！！！");
+        }
+        return R.error().put("code",0).put("msg","登录失败！！！");
     }
 
 

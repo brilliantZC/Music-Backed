@@ -2,7 +2,6 @@ package com.brilliantZC.music.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.brilliantZC.music.dao.SongDao;
-import com.brilliantZC.music.entity.Singer;
 import com.brilliantZC.music.entity.Song;
 import com.brilliantZC.music.service.SongService;
 import com.brilliantZC.music.utils.Consts;
@@ -257,7 +256,6 @@ public class SongController {
     @RequestMapping("/likeSongOfName")
     public Object likeSongOfName(@RequestParam("name") String name){
 
-        System.out.println(songService.songOfSongNameLike(name));
         return songService.songOfSongNameLike(name);
     }
 
