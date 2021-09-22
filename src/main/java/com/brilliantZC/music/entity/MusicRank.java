@@ -8,8 +8,8 @@ import java.io.Serializable;
 /*
 评分
  */
-@TableName("rank")
-public class Rank implements Serializable {
+@TableName("musicrank")
+public class MusicRank implements Serializable {
     /*主键*/
     @TableId
     private Integer id;
