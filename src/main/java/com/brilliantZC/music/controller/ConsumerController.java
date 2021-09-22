@@ -146,7 +146,7 @@ public class ConsumerController {
     private R loginConsumer(@RequestBody Consumer consumer){
         Consumer consumer1 = consumerService.getOne(new QueryWrapper<Consumer>().eq("username",consumer.getUsername()).eq("password",consumer.getPassword()));
         if(consumer1 != null){
-            return R.ok().put("code",1).put("userMsg",consumer1.getUsername()).put("msg","登录成功！！！");
+            return R.ok().put("code",1).put("userMsg",consumer1).put("msg","登录成功！！！");
         }
         return R.error().put("code",0).put("msg","登录失败！！！");
     }
