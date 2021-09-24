@@ -1,0 +1,106 @@
+package com.brilliantZC.music.entity;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+
+@TableName("comment")
+public class Comment implements Serializable {
+    /*主键*/
+    @TableId
+    private Integer id;
+    /*用户id*/
+    private Integer userId;
+    /*评论类型 （0歌曲1歌单）*/
+    private Byte type;
+    /*歌曲id*/
+    private Integer songId;
+    /*歌曲id*/
+    private Integer songListId;
+
+    /*评论内容*/
+    private String content;
+    /*创建时间*/
+    private String createTime;
+    /*点赞数*/
+    private Integer up;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
+    public Integer getSongId() {
+        return songId;
+    }
+
+    public void setSongId(Integer songId) {
+        this.songId = songId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getUp() {
+        return up;
+    }
+
+    public void setUp(Integer up) {
+        this.up = up;
+    }
+
+    public Integer getSongListId() {
+        return songListId;
+    }
+
+    public void setSongListId(Integer songListId) {
+        this.songListId = songListId;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", type=" + type +
+                ", songId=" + songId +
+                ", songListId=" + songListId +
+                ", content='" + content + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", up=" + up +
+                '}';
+    }
+}

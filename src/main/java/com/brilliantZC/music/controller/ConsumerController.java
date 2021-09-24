@@ -151,5 +151,12 @@ public class ConsumerController {
         return R.error().put("code",0).put("msg","登录失败！！！");
     }
 
+    ////根据用户id 查询用户详情
+    @RequestMapping("/selectByPrimaryKey")
+    private Object selectByPrimaryKey(@RequestParam("id") Integer id){
+
+        return consumerDao.selectById(id);
+    }
+
 
 }

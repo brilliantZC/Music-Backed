@@ -23,8 +23,6 @@ public class MusicRankController {
 
     /**
      * 新增评价
-     * @param rank
-     * @return
      */
     @RequestMapping("/add")
     private R addRank(@RequestBody MusicRank musicRank){
