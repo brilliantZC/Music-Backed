@@ -1,5 +1,6 @@
 package com.brilliantZC.music.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.brilliantZC.music.dao.SongListDao;
 import com.brilliantZC.music.entity.Singer;
 import com.brilliantZC.music.entity.SongList;
@@ -73,6 +74,13 @@ public class SongListController {
     private Object songListOfTitle(@RequestParam("title") String title){
 
         return songListService.songListOfTitle(title);
+    }
+
+    //根据风格模糊查询
+    @RequestMapping("/likeStyle")
+    private Object likeStyle(@RequestParam("style") String style){
+
+        return songListDao.selectList(new QueryWrapper<SongList>().like("style",style));
     }
 
 
