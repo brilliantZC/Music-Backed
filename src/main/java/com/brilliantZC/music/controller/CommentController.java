@@ -47,7 +47,7 @@ public class CommentController {
     @RequestMapping("/delete")
     private R deleteComment(@RequestParam("id") Integer id) {
         commentDao.deleteById(id);
-        return R.ok().put("msg", "删除成功！！！");
+        return R.ok().put("code", 1).put("msg", "删除成功！！！");
     }
 
     @RequestMapping("/allComment")

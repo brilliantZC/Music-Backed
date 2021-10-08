@@ -42,7 +42,14 @@ public class CollectController {
     @RequestMapping("/delete")
     private R deleteCollect(@RequestParam("id") Integer id) {
         collectDao.deleteById(id);
-        return R.ok().put("msg", "删除成功！！！");
+        return R.ok().put("code", 1).put("msg", "删除成功！！！");
+    }
+
+    @RequestMapping("/deletebyusersong")
+    private R deletebyusersong(@RequestParam("userId") Integer userId,@RequestParam("songId") Integer songId){
+        Collect collect = collectDao.selectOne(new QueryWrapper<Collect>().eq("user_id", userId).eq("song_id", songId));
+        collectDao.deleteById(collect.getId());
+        return R.ok().put("code", 1).put("msg", "删除成功！！！");
     }
 
     @RequestMapping("/allCollect")

@@ -83,9 +83,10 @@ public class SongController {
 
     //根据歌手id查询歌手
     @RequestMapping("/singer/detail")
-    public Object songOfSingerId(@RequestParam("singerId") Integer singerId){
+    public Object songOfSingerId(@RequestParam("singerId") String singerId){
 
-        return songService.songOfSingerId(singerId);
+        int singId = Integer.parseInt(singerId);
+        return songService.songOfSingerId(singId);
     }
 
     //模糊查询
